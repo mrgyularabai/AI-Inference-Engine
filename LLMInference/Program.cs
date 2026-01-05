@@ -212,15 +212,25 @@ namespace LLMInference
             }
 
             Console.WriteLine("\n  Model started successfully!");
-            Console.Write("  Enter initial text prompt:");
+            Console.WriteLine("  Enter initial text prompt:");
+            Console.WriteLine("");
+            Console.Write("  ");
 
             var currentText = Console.ReadLine();
+            
+            Console.WriteLine("");
+            Console.WriteLine("  Generating text:");
+            Console.WriteLine("");
+            Console.Write("  ");
             Console.Write(currentText);
-            while (true)
+
+            bool running = true;
+            while (running)
             {
                 model.GetNextWord(currentText, out string outputWord, out bool responseComplete, out string errorMessage);
                 Console.Write(outputWord);
                 currentText += outputWord;
+                running = !responseComplete;
             }
         }
     }
